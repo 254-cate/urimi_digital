@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Farmer Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f2f2f2;
+}
+
+/* Top Navigation */
+
+.navbar{
+    width:100%;
+    height:70px;
+    background:green;
+    color:white;
+    display:flex;
+    align-items:center;
+    padding:0 20px;
+}
+
+.menu{
+    font-size:30px;
+    cursor:pointer;
+    margin-right:20px;
+}
+
+.navbar h2{
+    flex:1;
+}
+
+.user{
+    font-size:18px;
+}
+
+/* Sidebar */
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:-250px;
+    width:250px;
+    height:100%;
+    background:#145A32;
+    transition:0.4s;
+    padding-top:70px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:18px;
+    font-size:18px;
+}
+
+.sidebar a:hover{
+    background:green;
+}
+
+/* Main Content */
+
+.content{
+    padding:30px;
+}
+
+.content h1{
+    color:green;
+    margin-bottom:15px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    margin-top:30px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.2);
+    text-align:center;
+}
+.h2{
+    color:black;
+    margin-bottom:15px;
+    text-align:center;
+}
+
+.profile-pic {
+
+    width: 120px;
+
+    height: 120px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 4px solid #1565c0;
+
+}
+.card h3{
+    color:green;
+    margin-bottom:10px;
+}
+
+.card button{
+    margin-top:15px;
+    padding:10px 20px;
+    border:none;
+    background:green;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.card button:hover{
+    background:#145A32;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+    color:#555;
+}
+
+</style>
+
+</head>
+
+<body>
+
+    {% if profile.photo %}
+
+<img src="{{ profile.photo.url }}" class="profile-pic">
+
+{% else %}
+
+<div class="profile-placeholder">
+🧑‍🌾🧑‍🌾
+</div>
+
+{% endif %}
+
+
+<h2>
+Welcome {{ request.user.username }}
+</h2>
+
+    
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+
+<!-- Navigation -->
+
+<div class="navbar">
+
+<div class="menu" onclick="toggleMenu()">☰👨‍🌾</div>
+
+
+<h2>urimidigital- Farmer Dashboard</h2>
+
+<div class="user">Welcome Farmer</div>
+
+</div>
+
+<!-- Sidebar -->
+
+<div class="sidebar" id="sidebar">
+
+<a href="#dashboard">🏠 Dashboard</a>
+
+<a href="{% url 'my_crop_advice' %}">🌾 Farm Advice</a>
+
+<a href="{% url 'ask_officer' %}">💬 Ask an Officer</a>
+
+<a href="{%url 'myquestions'%}"> 📋my questions</a>
+
+<a href="{% url 'viewannouncements' %}">📢 Announcements</a>
+
+<a href="{% url 'farm_records' %}">🌱 My Records</a>
+
+<a href="{% url 'add_activity' %}">➕ Add Activity</a>
+
+<a href="{% url 'weather_dashboard' %}">🌦 Weather Updates</a>
+
+<a href="{% url 'farmerprofile' %}">👤 My Profile</a>
+
+<a href="{% url 'marketprices' %}">💰 Market Prices</a>
+
+<a href="{% url 'website_feedback' %}">📝 Website Feedback</a>
+
+<a href="{% url 'logout' %}">🚪 Logout</a>
+
+</div>
+
+<!-- Main Content -->
+
+<div class="content">
+
+<h1>Welcome to urimi digital</h1>
+
+<p>Manage your farming activities and connect with agricultural officers.</p>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>🌾 Farm Advice</h3>
+
+<p>View the latest crop management tips.</p>
+
+<a href="{% url 'my_crop_advice' %}">
+    <button type="button">Open</button>
+</a>
+
+</div>
+
+<div class="card">
+
+<h3>💬 Ask an Officer</h3>
+
+<p>Submit your farming questions.</p>
+
+<a href="{% url 'ask_officer' %}">
+    <button type="button">Open</button>
+</a>
+
+
+</div>
+<div class="card">
+
+<h3>📋 My Questions</h3>
+
+<p>View all the questions you have submitted and officer replies.</p>
+
+<a href="{% url 'myquestions' %}">
+    <button type="button">Open</button>
+</a>
+
+</div>
+
+<div class="card">
+
+<h3>🌦 Weather</h3>
+
+<p>Check today's weather forecast.</p>
+
+<a href="{% url 'weather_dashboard' %}">
+    <button type="button">Open</button>
+</a>
+
+</div>
+
+<div class="card">
+
+<h3>📢 Announcements</h3>
+
+<p>Read the latest agricultural updates.</p>
+
+<a href="{% url 'viewannouncements' %}">
+    <button type="button">Open</button>
+</a>
+
+</div>
+
+<div class="card">
+
+<h3>🌱 My Records</h3>
+
+<p>Manage your crop records.</p>
+
+<a href="{% url 'farm_records' %}">
+    <button type="button">Open</button>
+</a>
+
+</div>
+
+<div class="card">
+
+<h3>👤 Profile</h3>
+
+<p>Update your account information.</p>
+
+<a href="{% url 'farmerprofile' %}">
+    <button type="button">Open</button>
+</a>
+
+</div>
+
+<div class="card">
+<h3> 💰Market Prices</h3>
+
+<p> Stay updated with the latest crop and livestock market prices.</p>
+
+<a href="{% url 'marketprices' %}">
+    <button type="button">Open</button>
+</a>
+</div>
+
+<div class="card">
+<h3>📝 Website Feedback</h3>
+<p>Provide feedback about the website.</p>
+<a href="{% url 'website_feedback' %}">
+    <button type="button">Open</button>
+</a>
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 urimidigital| Connecting Farmers and Agricultural Officers
+
+</footer>
+
+<script>
+
+function toggleMenu(){
+
+let sidebar=document.getElementById("sidebar");
+
+if(sidebar.style.left=="0px")
+{
+sidebar.style.left="-250px";
+}
+else
+{
+sidebar.style.left="0";
+}
+
+}
+
+</script>
+
+
+
+</body>
+</html>

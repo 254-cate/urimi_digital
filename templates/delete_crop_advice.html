@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Delete Farm Advice</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+header{
+    background:#c62828;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:90%;
+    max-width:600px;
+    margin:50px auto;
+}
+
+.card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
+
+}
+
+.card h2{
+
+    color:#c62828;
+
+    margin-bottom:20px;
+
+}
+
+.card p{
+
+    margin-bottom:25px;
+
+    font-size:18px;
+
+}
+
+button{
+
+    background:#c62828;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 30px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    margin-right:15px;
+
+}
+
+button:hover{
+
+    background:#8e0000;
+
+}
+
+.cancel{
+
+    background:#2e7d32;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:12px 30px;
+
+    border-radius:6px;
+
+}
+
+.cancel:hover{
+
+    background:#1b5e20;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🗑 Delete Farm Advice</h1>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Delete Confirmation</h2>
+
+<p>
+
+Are you sure you want to delete advice for
+
+<strong>{{ advice.farm_item }}</strong>?
+
+</p>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<button type="submit">
+
+Yes, Delete
+
+</button>
+
+<a href="{% url 'manage_crop_advice' %}" class="cancel">
+
+Cancel
+
+</a>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

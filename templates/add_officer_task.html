@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Add Officer Task</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6f4;
+}
+
+header{
+background:#2e7d32;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+width:90%;
+max-width:600px;
+background:white;
+margin:40px auto;
+padding:30px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+h2{
+color:#2e7d32;
+margin-bottom:20px;
+text-align:center;
+}
+
+label{
+display:block;
+margin-top:15px;
+font-weight:bold;
+}
+
+input,
+textarea{
+width:100%;
+padding:12px;
+margin-top:8px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:15px;
+}
+
+textarea{
+height:120px;
+resize:vertical;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:25px;
+background:#2e7d32;
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1b5e20;
+}
+
+.back{
+display:inline-block;
+margin-top:20px;
+text-decoration:none;
+color:#2e7d32;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>➕ Add Daily Task</h1>
+
+</header>
+
+<div class="container">
+
+<h2>Create Today's Task</h2>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<label>Task Title</label>
+
+<input
+type="text"
+name="title"
+placeholder="e.g Visit Dairy Farmers"
+required>
+
+<label>Description</label>
+
+<textarea
+name="description"
+placeholder="Write task details..."></textarea>
+
+<label>Due Date</label>
+
+<input
+type="date"
+name="due_date"
+required>
+
+<button type="submit">
+
+Save Task
+
+</button>
+
+</form>
+
+<a href="{% url 'officer_tasks' %}" class="back">
+
+← Back to Planner
+
+</a>
+
+</div>
+
+</body>
+
+</html>

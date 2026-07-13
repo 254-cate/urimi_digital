@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Farmer Profile</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+header{
+    background:#2e7d32;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    width:500px;
+    margin:50px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(0,0,0,.15);
+}
+
+h2{
+    text-align:center;
+    color:#2e7d32;
+    margin-bottom:25px;
+}
+.profile-image {
+
+    width: 150px;
+
+    height: 150px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 4px solid #2e7d32;
+
+}
+label{
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    margin-top:25px;
+    padding:14px;
+    background:#2e7d32;
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-size:17px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1b5e20;
+}
+
+.back{
+    display:block;
+    text-align:center;
+    margin-top:20px;
+    color:#2e7d32;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.back:hover{
+    text-decoration:underline;
+}
+.edit-btn {
+
+    display: inline-block;
+
+    background: #2e7d32;
+
+    color: white;
+
+    padding: 12px 25px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    margin-top: 20px;
+
+    transition: 0.3s;
+
+}
+
+
+.edit-btn:hover {
+
+    background: #1b5e20;
+
+    transform: translateY(-2px);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <h1>🌱 Urimi Digital</h1>
+</header>
+
+<div class="container">
+
+<h2>👤 My Profile</h2>
+
+{% if profile.photo %}
+<img src="{{ profile.photo.url }}"
+     class="profile-image">
+{% else %}
+{% endif %}
+<br><br>
+
+<p><strong>Full Name:</strong> {{ request.user.first_name }}</p>
+
+<p><strong>Username:</strong> {{ request.user.username }}</p>
+
+<p><strong>Phone Number:</strong>
+{{ profile.phone_number|default:"Not provided" }}
+</p>
+
+<p><strong>County:</strong>
+{{ profile.county|default:"Not selected" }}
+</p>
+
+<p><strong>Sub County:</strong>
+{{ profile.sub_county|default:"Not selected" }}
+</p>
+
+<p><strong>Ward:</strong>
+{{ profile.ward|default:"Not selected" }}
+</p>
+
+<p><strong>Farming Activity:</strong>
+{{ profile.farming_activity|default:"Not selected" }}
+</p>
+
+<p><strong>Bio:</strong>
+{{ profile.bio|default:"No bio yet." }}
+</p>
+
+<a href="{% url 'edit_profile' %}"  class="edit-btn">
+    ✏️ Edit Profile
+</a>
+
+
+<br><br>
+
+
+
+<a href="{% url 'farmerdashboard' %}" class="back">
+← Back to Dashboard
+</a>
+
+</div>

@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Market Prices</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+header{
+    background:#2e7d32;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    width:90%;
+    max-width:1000px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(0,0,0,.15);
+}
+
+h2{
+    color:#2e7d32;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#2e7d32;
+    color:white;
+    padding:15px;
+}
+
+td{
+    padding:15px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+tr:hover{
+    background:#f1f1f1;
+}
+
+.back{
+    display:inline-block;
+    margin-top:25px;
+    text-decoration:none;
+    color:white;
+    background:#2e7d32;
+    padding:12px 20px;
+    border-radius:5px;
+}
+
+.back:hover{
+    background:#1b5e20;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>💰 Current Market Prices</h1>
+
+</header>
+
+<div class="container">
+
+<h2>Latest Crop & Livestock Prices</h2>
+
+<table>
+
+<tr>
+
+<th>Product</th>
+
+<th>Category</th>
+
+<th>County</th>
+
+<th>Price</th>
+
+<th>Unit</th>
+
+<th>Updated</th>
+
+</tr>
+
+{% for price in prices %}
+
+<tr>
+
+<td>{{ price.product_name }}</td>
+
+<td>{{ price.product_type }}</td>
+
+<td>{{ price.county }}</td>
+
+<td>KSh {{ price.price }}</td>
+
+<td>{{ price.unit }}</td>
+
+<td>{{ price.updated_at }}</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="6">No market prices available.</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<a href="{% url 'farmerdashboard' %}" class="back">
+← Back to Dashboard
+</a>
+
+</div>
+
+</body>
+</html>

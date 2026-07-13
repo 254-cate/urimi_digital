@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Complete Task</title>
+
+<style>
+
+body{
+    background:#f4f6f4;
+    font-family:Arial,sans-serif;
+}
+
+.container{
+    max-width:550px;
+    margin:80px auto;
+    background:white;
+    padding:35px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+h2{
+    color:#2e7d32;
+    margin-bottom:20px;
+}
+
+p{
+    margin-bottom:25px;
+    font-size:17px;
+}
+
+.complete-btn{
+
+    background:#2e7d32;
+
+    color:white;
+
+    padding:12px 22px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:16px;
+}
+
+.complete-btn:hover{
+
+    background:#1b5e20;
+
+}
+
+.cancel{
+
+    margin-left:15px;
+
+    text-decoration:none;
+
+    color:#2e7d32;
+
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>✅ Complete Task</h2>
+
+<p>
+
+Are you sure you have completed
+
+<strong>{{ task.title }}</strong>?
+
+</p>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<button type="submit" class="complete-btn">
+
+Yes, Complete Task
+
+</button>
+
+<a href="{% url 'officer_tasks' %}" class="cancel">
+
+Cancel
+
+</a>
+
+</form>
+
+</div>
+
+</body>
+
+</html>

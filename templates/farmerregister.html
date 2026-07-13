@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Officer Registration</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+    background-image:
+    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+    url("markus-winkler-HeqXGxnsnX4-unsplash.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    min-height:100vh;
+    padding:40px;
+}
+
+.container{
+
+    width:450px;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(10px);
+
+    padding:40px;
+
+    border-radius:15px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.4);
+
+    color:white;
+
+}
+
+.logo{
+
+    text-align:center;
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+h2{
+
+    text-align:center;
+    color:gold;
+    margin-bottom:30px;
+}
+
+label{
+
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+input{
+
+    width:100%;
+    padding:12px;
+    margin-bottom:18px;
+
+    border:none;
+    border-radius:8px;
+
+    font-size:16px;
+}
+
+input:focus{
+
+    outline:none;
+    border:2px solid #4CAF50;
+}
+
+button{
+
+    width:100%;
+
+    padding:15px;
+
+    background:#4CAF50;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+button:hover{
+
+    background:#2E7D32;
+    transform:scale(1.02);
+}
+
+p{
+
+    text-align:center;
+    margin-top:20px;
+}
+
+a{
+
+    color:gold;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+a:hover{
+
+    text-decoration:underline;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">🧑‍🌾</div>
+
+<h2>Farmer Registration</h2>
+
+{% if messages %}
+{% for message in messages %} <p style="color:red;">{{ message }}</p>
+{% endfor %}
+{% endif %}
+
+<form action="" method="POST" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+<label>Full Name</label> <input 
+type="text" 
+name="fullname" 
+placeholder="Enter your full name" 
+required>
+
+<label>Username</label> <input 
+type="text" 
+name="username" 
+placeholder="Choose a username" 
+required>
+
+<label>Password</label> <input 
+type="password" 
+name="password" 
+placeholder="Create a password" 
+required>
+
+<label>Confirm Password</label> <input 
+type="password" 
+name="confirm_password" 
+placeholder="Confirm password" 
+required>
+
+<label>Profile Picture</label>
+
+<input
+    type="file"
+    name="photo"
+    accept="image/*">
+
+<label>Phone Number</label>
+<input type="text" name="phone_number">
+
+<label>Farming Activity</label>
+
+<select name="farming_activity">
+    <option value="">Select</option>
+    <option value="Crop Farming">Crop Farming</option>
+    <option value="Livestock Farming">Livestock Farming</option>
+    <option value="Mixed Farming">Mixed Farming</option>
+</select>
+
+<label>Bio</label>
+
+<textarea
+    name="bio"
+    rows="4"
+    placeholder="Tell us about yourself..."></textarea>
+
+<label>County</label> 
+<select name="county" id="county" required>
+
+<option value="">Select County</option>
+
+{% for county in counties %}
+
+<option value="{{ county.id }}">
+    {{ county.name }}
+</option>
+
+{% endfor %}
+
+</select>
+
+<label>Sub County</label>
+ <select name="sub_county" id="sub_county" required>
+
+<option value="">Select Sub County</option>
+
+</select>
+
+<label>Ward</label> <select name="ward" id="ward" required>
+
+<option value="">Select Ward</option>
+
+</select>
+
+<button type="submit">
+Register
+</button>
+
+</form>
+
+<p>
+Already have an account?
+
+<a href="{% url 'farmerlogin' %}">
+Login Here
+</a>
+
+</p>
+
+</div>
+<script>
+
+const countySelect = document.getElementById("county");
+const subCountySelect = document.getElementById("sub_county");
+const wardSelect = document.getElementById("ward");
+
+countySelect.addEventListener("change", function(){
+
+    fetch("/load-subcounties/?county=" + this.value)
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        subCountySelect.innerHTML =
+        '<option value="">Select Sub County</option>';
+
+        wardSelect.innerHTML =
+        '<option value="">Select Ward</option>';
+
+        data.forEach(function(subcounty){
+
+            subCountySelect.innerHTML +=
+            `<option value="${subcounty.id}">
+                ${subcounty.name}
+            </option>`;
+
+        });
+
+    });
+
+});
+
+
+subCountySelect.addEventListener("change", function(){
+
+    fetch("/load-wards/?sub_county=" + this.value)
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        wardSelect.innerHTML =
+        '<option value="">Select Ward</option>';
+
+        data.forEach(function(ward){
+
+            wardSelect.innerHTML +=
+            `<option value="${ward.id}">
+                ${ward.name}
+            </option>`;
+
+        });
+
+    });
+
+});
+
+</script>
+</body>
+</html>

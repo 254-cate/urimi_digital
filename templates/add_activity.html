@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Activity</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+body {
+    background: #f4f6f4;
+}
+
+header {
+    background: #2e7d32;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 40px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+button {
+    width: 100%;
+    background: #2e7d32;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #1b5e20;
+}
+
+.back {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: #2e7d32;
+    text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>➕ Add Farm Activity</h1>
+</header>
+
+<div class="container">
+
+<h2>Record New Activity</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Crop / Animal</label>
+<input type="text" name="crop_name" placeholder="e.g. Maize, Cow, Goat" required>
+
+    <label>Activity Type</label>
+    <select name="activity_type" required>
+        <option value="PLANTING">Planting</option>
+        <option value="SPRAYING">Spraying</option>
+        <option value="FERTILIZER">Fertilizer</option>
+        <option value="MILK">Milk Production</option>
+        <option value="FEEDING">Feeding</option>
+        <option value="DEWORMING">Deworming</option>
+    </select>
+
+    <label>Date</label>
+    <input type="date" name="date" required>
+
+    <label>Quantity (optional)</label>
+    <input type="number" step="0.1" name="quantity">
+
+    <label>Notes</label>
+    <textarea name="notes"></textarea>
+
+    <button type="submit">Save Activity</button>
+</form>
+
+<a href="{% url 'farm_records' %}" class="back">← Back to Records</a>
+
+</div>
+
+</body>
+</html>

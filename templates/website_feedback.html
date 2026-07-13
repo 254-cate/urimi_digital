@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Website Feedback</title>
+
+<style>
+
+body{
+
+    background:#f4f7f3;
+
+    font-family:Arial,sans-serif;
+
+}
+
+header{
+
+    background:#2e7d32;
+
+    color:white;
+
+    padding:20px;
+
+    text-align:center;
+
+}
+
+.container{
+
+    width:90%;
+
+    max-width:700px;
+
+    margin:30px auto;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:12px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+}
+
+h2{
+
+    color:#2e7d32;
+
+    margin-bottom:20px;
+
+}
+
+label{
+
+    display:block;
+
+    margin-top:18px;
+
+    margin-bottom:8px;
+
+    font-weight:bold;
+
+}
+
+select,
+
+textarea,
+
+input{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #ccc;
+
+    border-radius:8px;
+
+    font-size:15px;
+
+}
+
+textarea{
+
+    height:150px;
+
+    resize:vertical;
+
+}
+
+button{
+
+    width:100%;
+
+    margin-top:25px;
+
+    padding:14px;
+
+    background:#2e7d32;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+button:hover{
+
+    background:#1b5e20;
+
+}
+
+.back{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    text-decoration:none;
+
+    color:#2e7d32;
+
+    font-weight:bold;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>💬 Website Feedback</h1>
+
+</header>
+
+<div class="container">
+
+<h2>Help Us Improve Urimi Digital</h2>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<label>Overall Rating</label>
+
+<select name="rating" required>
+
+<option value="">Choose Rating</option>
+
+<option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+
+<option value="4">⭐⭐⭐⭐ Very Good</option>
+
+<option value="3">⭐⭐⭐ Good</option>
+
+<option value="2">⭐⭐ Fair</option>
+
+<option value="1">⭐ Poor</option>
+
+</select>
+
+<label>Feedback Category</label>
+
+<select name="category" required>
+
+<option value="">Choose Category</option>
+
+<option>General</option>
+
+<option>Bug Report</option>
+
+<option>Suggestion</option>
+
+<option>Feature Request</option>
+
+<option>Compliment</option>
+
+</select>
+
+<label>Your Feedback</label>
+
+<textarea
+
+name="message"
+
+placeholder="Tell us what you think about Urimi Digital..."
+
+required></textarea>
+
+<button type="submit">
+
+Submit Feedback
+
+</button>
+
+</form>
+
+<a href="javascript:history.back()" class="back">
+
+← Back
+
+</a>
+
+</div>
+
+</body>
+
+</html>

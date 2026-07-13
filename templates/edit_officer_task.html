@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Edit Task</title>
+
+<style>
+
+body{
+background:#f4f6f4;
+font-family:Arial,sans-serif;
+}
+
+.container{
+max-width:650px;
+margin:40px auto;
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+h1{
+text-align:center;
+color:#2e7d32;
+margin-bottom:25px;
+}
+
+label{
+display:block;
+margin-top:15px;
+font-weight:bold;
+}
+
+input,
+textarea{
+width:100%;
+padding:12px;
+margin-top:8px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+textarea{
+height:120px;
+}
+
+button{
+width:100%;
+margin-top:25px;
+padding:14px;
+background:#2e7d32;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background:#1b5e20;
+}
+
+.back{
+display:inline-block;
+margin-top:20px;
+text-decoration:none;
+color:#2e7d32;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>✏ Edit Task</h1>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<label>Task Title</label>
+
+<input
+type="text"
+name="title"
+value="{{ task.title }}"
+required>
+
+<label>Description</label>
+
+<textarea
+name="description">{{ task.description }}</textarea>
+
+<label>Due Date</label>
+
+<input
+type="date"
+name="due_date"
+value="{{ task.due_date|date:'Y-m-d' }}"
+required>
+
+<button>
+
+Save Changes
+
+</button>
+
+</form>
+
+<a href="{% url 'officer_tasks' %}" class="back">
+
+← Back
+
+</a>
+
+</div>
+
+</body>
+
+</html>

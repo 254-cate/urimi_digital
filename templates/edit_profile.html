@@ -1,0 +1,335 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+</head><link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
+<body>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background: #f2f7f1;
+    margin: 0;
+    padding: 0;
+}
+
+
+h1 {
+    text-align: center;
+    color: #2e7d32;
+    margin-top: 30px;
+}
+
+
+form {
+    width: 90%;
+    max-width: 600px;
+    background: white;
+    margin: 30px auto;
+    padding: 35px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+
+label {
+    display: block;
+
+    font-weight: bold;
+
+    color: #333;
+
+    margin-top: 18px;
+
+    margin-bottom: 7px;
+}
+
+
+input,
+textarea,
+select {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    box-sizing: border-box;
+
+}
+
+
+textarea {
+
+    height: 120px;
+
+    resize: vertical;
+
+}
+
+
+input:focus,
+textarea:focus,
+select:focus {
+
+    outline: none;
+
+    border-color: #2e7d32;
+
+}
+
+
+.form-group {
+
+    margin-top: 18px;
+
+}
+
+
+input[type="file"] {
+
+    background: #fafafa;
+
+    padding: 10px;
+
+}
+
+
+button {
+
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 14px;
+
+    background: #2e7d32;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+}
+
+
+button:hover {
+
+    background: #1b5e20;
+
+}
+
+
+.back-link {
+
+    display: block;
+
+    width: fit-content;
+
+    margin: 20px auto;
+
+    text-decoration: none;
+
+    color: #2e7d32;
+
+    font-weight: bold;
+
+}
+
+
+.back-link:hover {
+
+    text-decoration: underline;
+
+}
+    </style>
+<h1> ✏️ Edit Profile </h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+
+<label>First Name</label>
+<input 
+type="text" 
+name="first_name"
+value="{{ user.first_name }}"
+><br>
+
+
+<label>Last Name</label>
+<input 
+type="text" 
+name="last_name"
+value="{{ user.last_name }}"
+><br>
+
+
+<label>Username</label>
+<input 
+type="text" 
+name="username"
+value="{{ user.username }}"
+><br>
+
+
+<label>Phone Number</label>
+<input 
+type="text"
+name="phone_number"
+value="{{ profile.phone_number }}"
+><br>
+
+
+<label>Bio</label>
+<textarea name="bio">{{ profile.bio }}</textarea><br>
+
+
+<label>Profile Photo</label>
+<input type="file" name="photo"><br>
+
+
+
+
+<div class="form-group">
+
+<label>County</label>
+
+<select name="county" id="county">
+
+<option value="">Select County</option>
+
+{% for county in counties %}
+
+<option value="{{ county.id }}"
+{% if profile.county.id == county.id %}selected{% endif %}
+>
+{{ county.name }}
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Sub County</label>
+
+<select name="sub_county" id="sub_county">
+
+<option value="">Select Sub County</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Ward</label>
+
+<select name="ward" id="ward">
+
+<option value="">Select Ward</option>
+
+</select>
+
+</div>
+
+<button type="submit">
+update profile
+</button><br>
+
+
+</form>
+
+
+<a href="{% url 'farmerprofile' %}" class="back-link">
+    🔙 Back to Profile </a>
+<script>
+
+const county = document.getElementById("county");
+const subCounty = document.getElementById("sub_county");
+const ward = document.getElementById("ward");
+
+
+// Load sub counties when county changes
+
+county.addEventListener("change", function(){
+
+    fetch(`/load-subcounties/?county=${this.value}`)
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        subCounty.innerHTML =
+        '<option value="">Select Sub County</option>';
+
+        ward.innerHTML =
+        '<option value="">Select Ward</option>';
+
+
+        data.forEach(item => {
+
+            subCounty.innerHTML +=
+            `<option value="${item.id}">
+            ${item.name}
+            </option>`;
+
+        });
+
+    });
+
+});
+
+
+// Load wards when sub county changes
+
+subCounty.addEventListener("change", function(){
+
+    fetch(`/load-wards/?sub_county=${this.value}`)
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        ward.innerHTML =
+        '<option value="">Select Ward</option>';
+
+
+        data.forEach(item => {
+
+            ward.innerHTML +=
+            `<option value="${item.id}">
+            ${item.name}
+            </option>`;
+
+        });
+
+    });
+
+});
+
+
+</script>
+</body>
+</html>

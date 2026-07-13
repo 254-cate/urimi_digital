@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Add Market Price</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+header{
+    background:#2e7d32;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:500px;
+    margin:50px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(0,0,0,.15);
+}
+
+h2{
+    text-align:center;
+    color:#2e7d32;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    margin-top:25px;
+    padding:14px;
+    background:#2e7d32;
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-size:17px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1b5e20;
+}
+
+.back{
+    display:block;
+    text-align:center;
+    margin-top:20px;
+    color:#2e7d32;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.back:hover{
+    text-decoration:underline;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🌱 Urimi Digital</h1>
+
+</header>
+
+<div class="container">
+
+<h2>💰 Add Market Price</h2>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<label>Product Name</label>
+<input type="text" name="product_name" required>
+
+<label>Category</label>
+
+<select name="product_type" required>
+
+<option value="">Select Category</option>
+
+<option value="Crop">Crop</option>
+
+<option value="Livestock">Livestock</option>
+
+</select>
+
+<label>County</label>
+
+<input type="text" name="county" required>
+
+<label>Price (KSh)</label>
+
+<input type="number" step="0.01" name="price" required>
+
+<label>Unit</label>
+
+<select name="unit">
+
+<option value="Per Kg">Per Kg</option>
+
+<option value="Per Bag (90 Kg)">Per Bag (90 Kg)</option>
+
+<option value="Per Litre">Per Litre</option>
+
+<option value="Per Animal">Per Animal</option>
+
+<option value="Per Crate">Per Crate</option>
+
+<option value="Per Tray">Per Tray</option>
+
+<option value="Per Bunch">Per Bunch</option>
+
+</select>
+
+<button type="submit">
+Save Market Price
+</button>
+
+</form>
+
+<a href="{% url 'officermarketprices' %}" class="back">
+← Back to Market Prices
+</a>
+
+</div>
+
+</body>
+</html>

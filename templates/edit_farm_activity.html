@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Edit Farm Activity</title>
+
+
+<style>
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    font-family: Arial, sans-serif;
+
+}
+
+
+body {
+
+    background: #f4f6f4;
+
+}
+
+
+
+header {
+
+    background: #2e7d32;
+
+    color: white;
+
+    padding: 20px;
+
+    text-align: center;
+
+}
+
+
+
+.container {
+
+    width: 90%;
+
+    max-width: 600px;
+
+    background: white;
+
+    margin: 40px auto;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+}
+
+
+
+h2 {
+
+    color: #2e7d32;
+
+    margin-bottom: 25px;
+
+    text-align: center;
+
+}
+
+
+
+label {
+
+    display: block;
+
+    font-weight: bold;
+
+    margin-top: 15px;
+
+    margin-bottom: 5px;
+
+}
+
+
+
+input,
+select,
+textarea {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+}
+
+
+
+textarea {
+
+    height: 120px;
+
+    resize: none;
+
+}
+
+
+
+button {
+
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 14px;
+
+    background: #2e7d32;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+}
+
+
+
+button:hover {
+
+    background: #1b5e20;
+
+}
+
+
+
+.back {
+
+    display: block;
+
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #2e7d32;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+<header>
+
+<h1>✏️ Edit Farm Record</h1>
+
+</header>
+
+
+
+<div class="container">
+
+
+<h2>Update Activity</h2>
+
+
+
+<form method="POST">
+
+
+{% csrf_token %}
+
+
+
+<label>
+Crop / Farm Item
+</label>
+
+
+<input
+
+type="text"
+
+name="crop_name"
+
+value="{{ activity.crop_name }}"
+
+required
+
+>
+
+
+
+
+<label>
+Activity Type
+</label>
+
+
+<select name="activity_type">
+
+
+<option value="PLANTING"
+{% if activity.activity_type == "PLANTING" %}selected{% endif %}
+>
+
+Planting
+
+</option>
+
+
+
+<option value="SPRAYING"
+{% if activity.activity_type == "SPRAYING" %}selected{% endif %}
+>
+
+Spraying
+
+</option>
+
+
+
+<option value="FERTILIZER"
+{% if activity.activity_type == "FERTILIZER" %}selected{% endif %}
+>
+
+Fertilizer
+
+</option>
+
+
+
+<option value="HARVEST"
+{% if activity.activity_type == "HARVEST" %}selected{% endif %}
+>
+
+Harvest
+
+</option>
+
+
+
+<option value="FEEDING"
+{% if activity.activity_type == "FEEDING" %}selected{% endif %}
+>
+
+Feeding
+
+</option>
+
+
+
+<option value="MILK"
+{% if activity.activity_type == "MILK" %}selected{% endif %}
+>
+
+Milk Production
+
+</option>
+
+
+
+<option value="VACCINATION"
+{% if activity.activity_type == "VACCINATION" %}selected{% endif %}
+>
+
+Vaccination
+
+</option>
+
+
+
+<option value="DEWORMING"
+{% if activity.activity_type == "DEWORMING" %}selected{% endif %}
+>
+
+Deworming
+
+</option>
+
+
+</select>
+
+
+
+
+
+<label>
+Date
+</label>
+
+
+<input
+
+type="date"
+
+name="date"
+
+value="{{ activity.date|date:'Y-m-d' }}"
+
+required
+
+>
+
+
+
+
+
+<label>
+Quantity
+</label>
+
+
+<input
+
+type="number"
+
+step="any"
+
+name="quantity"
+
+value="{{ activity.quantity }}"
+
+required
+
+>
+
+
+
+
+
+<label>
+Notes
+</label>
+
+
+<textarea name="notes">
+
+{{ activity.notes }}
+
+</textarea>
+
+
+
+
+
+<button type="submit">
+
+💾 update records
+
+</button>
+
+
+
+
+</form>
+
+
+
+
+<a href="{% url 'farm_records' %}" class="back">
+
+← Back to Farm Records
+
+</a>
+
+
+
+
+</div>
+
+
+
+</body>
+
+</html>

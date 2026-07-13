@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add Farming Tip</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f4f6f4;
+}
+
+header {
+    background: #2e7d32;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 30px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #2e7d32;
+    color: white;
+    border: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>➕ Add Farming Tip</h1>
+</header>
+
+<div class="container">
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <input type="text" name="title" placeholder="Tip Title" required>
+
+    <select name="category">
+        <option value="CROPS">Crops</option>
+        <option value="LIVESTOCK">Livestock</option>
+        <option value="IRRIGATION">Irrigation</option>
+        <option value="GENERAL">General</option>
+    </select>
+
+    <textarea name="content" placeholder="Write farming tip..." required></textarea>
+
+    <label>Image</label>
+    <input type="file" name="image">
+
+    <label>Video</label>
+    <input type="file" name="video">
+
+    <button type="submit">Publish Tip</button>
+</form>
+
+</div>
+
+</body>
+</html>

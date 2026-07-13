@@ -1,0 +1,303 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Edit Officer Profile</title>
+
+<link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
+
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background: #f2f7f1;
+    margin: 0;
+    padding: 0;
+}
+
+
+h1 {
+    text-align: center;
+    color: #1565c0;
+    margin-top: 30px;
+}
+
+
+form {
+
+    width: 90%;
+    max-width: 650px;
+
+    background: white;
+
+    margin: 30px auto;
+
+    padding: 35px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+
+}
+
+
+label {
+
+    display: block;
+
+    font-weight: bold;
+
+    margin-top: 18px;
+
+    margin-bottom: 7px;
+
+    color: #333;
+
+}
+
+
+
+input,
+textarea,
+select {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    box-sizing: border-box;
+
+}
+
+
+
+textarea {
+
+    height: 120px;
+
+    resize: vertical;
+
+}
+
+
+
+input:focus,
+textarea:focus,
+select:focus {
+
+    outline: none;
+
+    border-color: #1565c0;
+
+}
+
+
+
+input[type="file"] {
+
+    background: #fafafa;
+
+    padding: 10px;
+
+}
+
+
+
+button {
+
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 14px;
+
+    background: #1565c0;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+
+button:hover {
+
+    background: #0d47a1;
+
+}
+
+
+
+.back-link {
+
+    display: block;
+
+    width: fit-content;
+
+    margin: 20px auto;
+
+    text-decoration: none;
+
+    color: #1565c0;
+
+    font-weight: bold;
+
+}
+
+
+
+.back-link:hover {
+
+    text-decoration: underline;
+
+}
+
+
+
+/* Current profile image */
+
+.profile-image {
+
+    display: block;
+
+    width: 140px;
+
+    height: 140px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    margin: 0 auto 20px;
+
+    border: 4px solid #1565c0;
+
+}
+</style>
+
+
+<body>
+
+
+<h1>✏️ Edit Officer Profile</h1>
+
+
+<form method="POST" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+
+<label>Full Name</label>
+
+<input 
+type="text"
+name="first_name"
+value="{{ user.first_name }}"
+>
+
+
+<label>Username</label>
+
+<input 
+type="text"
+name="username"
+value="{{ user.username }}"
+>
+
+
+
+<label>Phone Number</label>
+
+<input
+type="text"
+name="phone_number"
+value="{{ profile.phone_number }}"
+>
+
+
+
+<label>Profession / Specialization</label>
+
+<input
+type="text"
+name="specialization"
+value="{{ profile.specialization }}"
+>
+
+
+
+<label>Bio</label>
+
+<textarea name="bio">{{ profile.bio }}</textarea>
+
+
+{% if profile.photo %}
+
+<img src="{{ profile.photo.url }}" class="profile-image">
+
+{% endif %}
+
+<label>Profile Photo</label>
+
+<input 
+type="file"
+name="photo"
+>
+
+
+
+<label>County</label>
+
+<select name="county" id="county">
+
+{% for county in counties %}
+
+<option value="{{ county.id }}"
+{% if profile.county.id == county.id %}
+selected
+{% endif %}
+>
+
+{{ county.name }}
+
+</option>
+
+{% endfor %}
+
+</select>
+<button type="submit">
+
+update profile
+
+</button>
+
+
+</form>
+
+
+<a href="{% url 'officer_profile' %}">
+🔙 Back to Profile
+</a>
+
+
+</body>
+
+</html>

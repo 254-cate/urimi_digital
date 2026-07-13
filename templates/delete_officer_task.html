@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Delete Task</title>
+
+<style>
+
+body{
+
+background:#f4f6f4;
+
+font-family:Arial,sans-serif;
+
+}
+
+.container{
+
+max-width:550px;
+
+margin:80px auto;
+
+background:white;
+
+padding:30px;
+
+text-align:center;
+
+border-radius:12px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+}
+
+h2{
+
+color:#d32f2f;
+
+margin-bottom:20px;
+
+}
+
+button{
+
+background:#d32f2f;
+
+color:white;
+
+padding:12px 20px;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-size:16px;
+
+}
+
+button:hover{
+
+background:#b71c1c;
+
+}
+
+.cancel{
+
+display:inline-block;
+
+margin-left:15px;
+
+text-decoration:none;
+
+color:#2e7d32;
+
+font-weight:bold;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>⚠ Delete Task</h2>
+
+<p>
+
+Are you sure you want to delete
+
+<strong>{{ task.title }}</strong>?
+
+</p>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<button>
+
+🗑 Delete
+
+</button>
+
+<a href="{% url 'officer_tasks' %}" class="cancel">
+
+Cancel
+
+</a>
+
+</form>
+
+</div>
+
+</body>
+
+</html>

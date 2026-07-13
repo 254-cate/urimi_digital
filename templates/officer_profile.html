@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Officer Profile</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    background:#f4f4f4;
+}
+
+header{
+    background:#2e7d32;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:90%;
+    max-width:700px;
+    margin:30px auto;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.15);
+}
+
+img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    margin:0 auto 15px;
+}
+
+.profile-image {
+
+    width: 150px;
+
+    height: 150px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 4px solid #2e7d32;
+
+}
+
+input, textarea, select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:14px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#2e7d32;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1b5e20;
+}
+
+.label{
+    font-weight:bold;
+    margin-top:10px;
+    display:block;
+}
+.edit-btn {
+
+    display: inline-block;
+
+    background: #2e7d32;
+
+    color: white;
+
+    padding: 12px 25px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    margin-top: 20px;
+
+    transition: 0.3s;
+
+}
+
+
+.edit-btn:hover {
+
+    background: #1b5e20;
+
+    transform: translateY(-2px);
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>👤 Officer Profile</h1>
+</header>
+
+<div class="container">
+
+
+{% if profile.photo %}
+
+<img src="{{ profile.photo.url }}"
+     class="profile-image">
+
+{% else %}
+
+<p>No profile photo uploaded</p>
+
+{% endif %}
+
+<p><strong>Full Name:</strong> {{ request.user.first_name }}</p>
+
+<p><strong>Username:</strong> {{ request.user.username }}</p>
+
+<p><strong>Phone Number:</strong>
+{{ profile.phone_number|default:"Not provided" }}
+</p>
+
+<p><strong>County:</strong>
+{{ profile.county|default:"Not selected" }}
+</p>
+
+<p><strong>Profession / Specialization:</strong>
+{{ profile.specialization|default:"Not provided" }}
+</p>
+
+<a href="{% url 'edit_officer_profile' %}" class="edit-btn">
+    ✏️ Edit Profile
+</a><br>
+ 
+
+<a href="{% url 'officerdashboard' %}" class="back">
+← Back to Dashboard
+</a>
+
+</div>
+</body>
+</html>

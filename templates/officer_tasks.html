@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Officer Daily Planner</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6f4;
+}
+
+header{
+background:#2e7d32;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+width:95%;
+max-width:1100px;
+margin:30px auto;
+}
+
+.add-btn{
+display:inline-block;
+background:#2e7d32;
+color:white;
+padding:12px 18px;
+text-decoration:none;
+border-radius:8px;
+margin-bottom:20px;
+}
+
+.add-btn:hover{
+background:#1b5e20;
+}
+
+table{
+width:100%;
+background:white;
+border-collapse:collapse;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 5px 12px rgba(0,0,0,.1);
+}
+
+th{
+background:#2e7d32;
+color:white;
+padding:14px;
+}
+
+td{
+padding:14px;
+border-bottom:1px solid #ddd;
+}
+
+tr:hover{
+background:#f8fff8;
+}
+
+.completed{
+color:green;
+font-weight:bold;
+}
+
+.pending{
+color:#d32f2f;
+font-weight:bold;
+}
+
+.back{
+display:inline-block;
+margin-top:25px;
+text-decoration:none;
+font-weight:bold;
+color:#2e7d32;
+}
+
+.actions{
+
+    white-space:nowrap;
+
+}
+
+.edit-btn{
+
+    display:inline-block;
+
+    background:#1976d2;
+
+    color:white;
+
+    padding:8px 14px;
+
+    border-radius:6px;
+
+    text-decoration:none;
+
+    margin-right:5px;
+
+    transition:.3s;
+
+}
+
+.edit-btn:hover{
+
+    background:#0d47a1;
+
+}
+
+.delete-btn{
+
+    display:inline-block;
+
+    background:#d32f2f;
+
+    color:white;
+
+    padding:8px 14px;
+
+    border-radius:6px;
+
+    text-decoration:none;
+
+    margin-right:5px;
+
+    transition:.3s;
+
+}
+
+.delete-btn:hover{
+
+    background:#b71c1c;
+
+}
+
+.complete-btn{
+
+    display:inline-block;
+
+    background:#2e7d32;
+
+    color:white;
+
+    padding:8px 14px;
+
+    border-radius:6px;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.complete-btn:hover{
+
+    background:#1b5e20;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📅 Officer Daily Planner</h1>
+
+</header>
+
+<div class="container">
+
+<a href="{% url 'add_officer_task' %}" class="add-btn">
+
+➕ Add New Task
+
+</a>
+
+<table>
+
+<tr>
+
+<th>Task</th>
+
+<th>Description</th>
+
+<th>Due Date</th>
+
+<th>Status</th>
+
+<th>Actions</th>
+
+</tr>
+
+{% for task in tasks %}
+
+<tr>
+
+<td class="actions">{{ task.title }}</td>
+
+<td class="actions">{{ task.description }}</td>
+
+<td class="actions">{{ task.due_date }}</td>
+
+<td class="actions">
+
+{% if task.completed %}
+
+<span class="completed">✔ Completed</span>
+
+{% else %}
+
+<span class="pending">⏳ Pending</span>
+
+{% endif %}
+
+</td>
+
+<td class="actions">
+
+<a href="{% url 'edit_officer_task' task.id %}" class="edit-btn">
+
+✏ Edit
+
+</a>
+
+|
+
+<a href="{% url 'delete_officer_task' task.id %}" class="delete-btn">
+
+🗑 Delete
+
+</a>
+
+|
+
+<a href="{% url 'complete_officer_task' task.id %}" class="complete-btn">
+
+✅ Complete
+
+</a>
+
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="5">
+
+No tasks created yet.
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<a href="{% url 'officerdashboard' %}" class="back">
+
+← Back to Dashboard
+
+</a>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Farming Tips</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f4f6f4;
+}
+
+header {
+    background: #2e7d32;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.tag {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #2e7d32;
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🌱 Farming Tips</h1>
+</header>
+
+<div class="container">
+
+{% for tip in tips %}
+
+<div class="card">
+
+    <span class="tag">{{ tip.category }}</span>
+
+    <h2>{{ tip.title }}</h2>
+
+    <p>{{ tip.content }}</p>
+
+    {% if tip.image %}
+        <img src="{{ tip.image.url }}">
+    {% endif %}
+
+    {% if tip.video %}
+        <video width="100%" controls>
+            <source src="{{ tip.video.url }}">
+        </video>
+    {% endif %}
+
+</div>
+
+{% empty %}
+
+<p>No tips available yet.</p>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>

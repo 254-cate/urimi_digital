@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Post Announcement</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+header{
+    background:#2e7d32;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:600px;
+    max-width:90%;
+    margin:50px auto;
+    background:white;
+    padding:35px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.container h2{
+    text-align:center;
+    color:#2e7d32;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    margin-top:18px;
+    font-weight:bold;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:16px;
+}
+
+textarea{
+    min-height:220px;
+    resize:vertical;
+}
+
+button{
+    width:100%;
+    margin-top:30px;
+    padding:15px;
+    border:none;
+    border-radius:6px;
+    background:#2e7d32;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1b5e20;
+}
+
+.back{
+    display:block;
+    text-align:center;
+    margin-top:20px;
+    color:#2e7d32;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.back:hover{
+    text-decoration:underline;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🌱 Urimi Digital</h1>
+
+</header>
+
+<div class="container">
+
+<h2>📢 Post Announcement</h2>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<label>Announcement Title</label>
+
+<input
+type="text"
+name="title"
+placeholder="Enter announcement title"
+required>
+
+<label>Announcement</label>
+
+<textarea
+name="message"
+placeholder="Write your announcement here..."
+required></textarea>
+
+<button type="submit">
+
+📢 Post Announcement
+
+</button>
+
+</form>
+
+<a href="{% url 'officerdashboard' %}" class="back">
+
+← Back to Dashboard
+
+</a>
+
+</div>
+
+</body>
+</html>

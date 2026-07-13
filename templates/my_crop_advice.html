@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Crop Advice</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f6f4;
+}
+
+header {
+    background: #2e7d32;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+.category{
+    display:inline-block;
+    background:#1976d2;
+    color:white;
+    padding:5px 12px;
+    border-radius:20px;
+    margin-left:10px;
+    font-size:13px;
+}
+
+h2 {
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+/* CARD */
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    border-left: 5px solid #2e7d32;
+}
+
+.card h3 {
+    color: #2e7d32;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+/* TAG */
+.tag {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.OFFICER { background: #1976d2; }
+.SYSTEM { background: #6a1b9a; }
+.REPORT { background: #f57c00; }
+.TIP { background: #388e3c; }
+
+.back {
+    display: inline-block;
+    margin-top: 20px;
+    color: #2e7d32;
+    text-decoration: none;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🌾 Urimi Digital - Farm Advice</h1>
+</header>
+
+<div class="container">
+
+<h2>📌 My Farm Advice</h2>
+
+{% for a in advice %}
+<div class="card">
+
+    <span class="tag {{ a.source }}">
+        {{ a.source }}
+    </span>
+
+    <span class="category">
+        {% if a.category == "CROP" %}
+            🌽 Crop
+        {% else %}
+            🐄 Livestock
+        {% endif %}
+    </span>
+
+    <h3>{{ a.farm_item }}</h3>
+
+    <p>{{ a.advice }}</p>
+
+    <small>📅 {{ a.created_at }}</small>
+
+</div>
+
+{% empty %}
+
+<p>No crop advice available yet.</p>
+
+{% endfor %}
+
+<a href="{% url 'farmerdashboard' %}" class="back">
+← Back to Dashboard
+</a>
+
+</div>
+
+</body>
+</html>
