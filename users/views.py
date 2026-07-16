@@ -795,8 +795,7 @@ def delete_crop_advice(request, id):
     )
 #=================== farming tips =================
 
-@login_required
-@officer_required
+
 def farming_tips(request):
 
     tips = FarmingTip.objects.all().order_by("-created_at")
