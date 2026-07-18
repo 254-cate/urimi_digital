@@ -929,6 +929,18 @@ def weather_dashboard(request):
 
     response = requests.get(url)
     weather = response.json()
+    weather = response.json()
+
+    if response.status_code != 200:
+          return render(
+        request,
+        "weather_dashboard.html",
+        {
+            "profile": profile,
+            "error": weather.get("message", "Unable to fetch weather."),
+        },
+    )
+
 
     temperature = weather["main"]["temp"]
     humidity = weather["main"]["humidity"]
@@ -1021,7 +1033,7 @@ def load_wards(request):
 
 #=================== views for json locationson weather things==========
 @login_required
-@officer_required
+
 def save_location(request):
     if request.method == "POST":
         data = json.loads(request.body)
