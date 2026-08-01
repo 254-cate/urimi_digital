@@ -288,11 +288,11 @@ Milk Production
 
 
 
-<option value="VACCINATION"
-{% if activity.activity_type == "VACCINATION" %}selected{% endif %}
+<option value="INJECTIONS"
+{% if activity.activity_type == "INJECTIONS" %}selected{% endif %}
 >
 
-Vaccination
+Injection
 
 </option>
 
@@ -303,6 +303,30 @@ Vaccination
 >
 
 Deworming
+
+</option>
+
+<option value="INSEMINATION"
+{% if activity.activity_type == "INSEMINATION" %}selected{% endif %}
+>
+
+Insemination
+
+</option>
+
+<option value="BIRTH"
+{% if activity.activity_type == "BIRTH" %}selected{% endif %}
+>
+
+Birth
+
+</option>
+
+<option value="WEEDING"
+{% if activity.activity_type == "WEEDING" %}selected{% endif %}
+>
+
+Weeding
 
 </option>
 
