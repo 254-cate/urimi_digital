@@ -285,6 +285,10 @@ class FarmActivity(models.Model):
         ("MILK", "Milk Production"),
         ("VACCINATION", "Vaccination"),
         ("DEWORMING", "Deworming"),
+        ("INSEMINATION", "Insemination"),
+        ("BIRTH", "Birth"),
+        ("INJECTIONS", "Injections"),
+        ("WEEDING", "Weeding"),
     ]
 
     farmer = models.ForeignKey(User, on_delete=models.CASCADE)
