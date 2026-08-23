@@ -42,13 +42,19 @@ header{
     font-weight:bold;
 }
 
-nav a{
-    color:white;
-    text-decoration:none;
-    margin-left:25px;
-    font-size:18px;
-    transition:.3s;
+nav {
+    display: flex;
+    gap: 30px;
+    align-items: center;
 }
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: .3s;
+}
+
 
 nav a:hover{
     color:gold;
@@ -321,6 +327,74 @@ footer{
 
     font-size:17px;
 }
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+    header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 25px;
+    }
+
+    nav {
+        width: 100%;
+        justify-content: center;
+        gap: 22px;
+    }
+
+    nav a {
+        font-size: 16px;
+    }
+
+    .home-gallery {
+        padding: 50px 20px;
+    }
+
+    .gallery-title h2 {
+        font-size: 28px;
+    }
+
+    .gallery-title p {
+        font-size: 16px;
+    }
+
+    .image-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .image-card {
+        height: 250px;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 50px 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 38px;
+    }
+
+    .hero-content h2 {
+        font-size: 23px;
+    }
+
+    .intro {
+        font-size: 17px;
+    }
+
+    .roles label {
+        display: block;
+        margin: 12px 0;
+    }
+
+}
 
 </style>
 </head>
@@ -369,13 +443,47 @@ footer{
 
 <a href="{% url 'farming_tips' %}" class="btn">View all tips →</a>
 </section>
+<section id="home" class="home-gallery">
 
+    <div class="gallery-title">
+        <h2>🌱 Agriculture at the Heart of Our Community</h2>
+        <p>
+            Empowering farmers with knowledge, technology and professional
+            agricultural support.
+        </p>
+    </div>
 
+    <div class="image-grid">
 
+        <div class="image-card">
+            <img src="{%C:\Users\HP\urimi_digital\users\static\images\WhatsApp Image 2026-08-20 at 1.05.12 PM.jpeg%}" alt="Farmer working in a field">
+            <div class="image-overlay">
+                <h3>Smart Farming</h3>
+                <p>Better knowledge. Better farming.</p>
+            </div>
+        </div>
 
- <section id="home" class="hero"></section>
+        <div class="image-card">
+            <img src="{% C:\Users\HP\urimi_digital\users\static\images\WhatsApp Image 2026-08-20 at 1.05.16 PM.jpeg %}" alt="Agricultural crops">
+            <div class="image-overlay">
+                <h3>Healthy Crops</h3>
+                <p>Growing a better future.</p>
+            </div>
+        </div>
 
- <section id="farmer">
+        <div class="image-card">
+            <img src="{% C:\Users\HP\urimi_digital\users\static\images\WhatsApp Image 2026-08-20 at 1.05.18 PM.jpeg %}" alt="Farmer in a farm">
+            <div class="image-overlay">
+                <h3>Supporting Farmers</h3>
+                <p>Knowledge that makes a difference.</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="farmer">
     <h2>farmers</h2>
     <p>Every farmer deserves easy access to reliable agricultural information and professional support</p>
 </section>
@@ -392,7 +500,7 @@ footer{
 
 <div class="hero-content">
 
-<h1>Welcome Farmers 😊</h1>
+<h1>Welcome Farmers </h1>
 
 <h2>Connecting Farmers & Agricultural Officers</h2>
 
